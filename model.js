@@ -26,3 +26,10 @@ function Line ( startX, startY, thickness, color, endX, endY){
     this.endY = endY;
 }
 
+//ellipse use startX, startY and 2 rayons
+function Ellipse(startX, startY, thickness, color, rayon1, rayon2) {
+    Shape.call(this, startX, startY, thickness, color);
+    this.rayon1 = rayon1;
+    this.rayon2 = rayon2;
+}
+

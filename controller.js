@@ -1,5 +1,5 @@
 
-var editingMode = { rect: 0, line: 1 };
+var editingMode = { rect: 0, line: 1, ellipse: 2 };
 
 function Pencil(ctx, drawing, canvas) {
 	this.currEditingMode = editingMode.line;
@@ -10,6 +10,7 @@ function Pencil(ctx, drawing, canvas) {
 	// Liez ici les widgets à la classe pour modifier les attributs présents ci-dessus.
 	document.getElementById('butRect').onclick = (_) => this.currEditingMode=editingMode.rect
 	document.getElementById('butLine').onclick = (_) => this.currEditingMode=editingMode.line
+	document.getElementById('butEllipse').onclick = (_) => this.currEditingMode=editingMode.ellipse
 	document.getElementById('spinnerWidth').onclick = (e) => this.currLineWidth=e.target.value
 	document.getElementById('colour').onclick = (e) => this.currColour=e.target.value
 
@@ -22,10 +23,17 @@ function Pencil(ctx, drawing, canvas) {
 
 	}.bind(this);
 	this.onInteractionUpdate = function (DnD) {
+
 		if(this.currEditingMode===editingMode.rect){
 		this.currentShape=new Rectangle(DnD.initX,DnD.initY,this.currLineWidth,this.currColour,DnD.finalX - DnD.initX,DnD.finalY- DnD.initY);
-		}else{
+		}else if (this.currEditingMode===editingMode.line){
 			this.currentShape=new Line(DnD.initX,DnD.initY,this.currLineWidth,this.currColour,DnD.finalX,DnD.finalY);
+		}else if (this.currEditingMode===editingMode.ellipse){
+			let startDeX= (DnD.initX+DnD.finalX)/2;
+			let startDeY= (DnD.initY+DnD.finalY)/2;
+			let rayon1 = Math.abs(DnD.finalX - DnD.initX) / 2;
+			let rayon2 = Math.abs(DnD.finalY - DnD.initY) / 2;
+			this.currentShape = new Ellipse(startDeX,startDeY,this.currLineWidth,this.currColour,rayon1,rayon2);
 		}
 		drawing.paint(ctx,canvas);
 		this.currentShape.paint(ctx);

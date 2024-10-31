@@ -6,7 +6,7 @@ Rectangle.prototype.paint = function(ctx) {
     ctx.strokeStyle = this.color;
     ctx.lineWidth = this.thickness;
     ctx.beginPath();
-    ctx.rect(this.startX, this.startY, this.height,   this.width);
+    ctx.strokeRect(this.startX, this.startY, this.height,   this.width);
     ctx.stroke();
 };
 
@@ -19,6 +19,14 @@ Line.prototype.paint = function(ctx) {
     ctx.lineTo(this.endX, this.endY);
     ctx.stroke();
 };
+
+Ellipse.prototype.paint = function(ctx) {
+    ctx.strokeStyle=this.color;
+    ctx.lineWidth = this.thickness;
+    ctx.beginPath();
+    ctx.ellipse(this.startX, this.startY,this.rayon1, this.rayon2,0,0,2 * Math.PI);
+    ctx.stroke();
+}
 
 Drawing.prototype.paint = function(ctx) {
     //console.log(this.getForms());
@@ -39,6 +47,8 @@ function toDom(shape, index) {
             innerHtml += '<span style="color:' + shape.color + '"></span> Rectangle'
         else if (shape.constructor === Line)
             innerHtml += '<span style="color:' + shape.color + '"></span> Line'
+        else if (shape.constructor === Ellipse)
+            innerHtml += '<span style="color:' + shape.color + '"></span> Ellipse'
         innerHtml +=`<button type="button" class="btn btn-default"
                 id="remove${index}">         
                 <span class="glyphicon glyphicon-remove-sign">
