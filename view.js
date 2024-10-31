@@ -4,7 +4,7 @@
 Rectangle.prototype.paint = function(ctx) {
     //TODO Manager color
     ctx.strokeStyle = this.color;
-    ctx.lineWidth = this.width;
+    ctx.lineWidth = this.thickness;
     ctx.beginPath();
     ctx.rect(this.startX, this.startY, this.height,   this.width);
     ctx.stroke();
