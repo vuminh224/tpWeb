@@ -10,8 +10,8 @@ function Pencil(ctx, drawing, canvas) {
 	// Liez ici les widgets à la classe pour modifier les attributs présents ci-dessus.
 	document.getElementById('butRect').onclick = (_) => this.currEditingMode=editingMode.rect
 	document.getElementById('butLine').onclick = (_) => this.currEditingMode=editingMode.line
-	document.getElementById('spinnerWidth').onclick = (_) => this.currLineWidth=e.target.value
-	document.getElementById('colour').onclick = (_) => this.currColour=e.target.value
+	document.getElementById('spinnerWidth').onclick = (e) => this.currLineWidth=e.target.value
+	document.getElementById('colour').onclick = (e) => this.currColour=e.target.value
 
 
 	new DnD(canvas, this);
