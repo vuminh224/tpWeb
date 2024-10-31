@@ -3,7 +3,7 @@
 // N'oubliez pas l'héritage !
 
 function Drawing(){
-    this.shapeArray= []
+    this.shapeArray= new Map()
 }
 
 //
